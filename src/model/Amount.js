@@ -32,7 +32,7 @@ class Amount {
   }
 
   static isCheckNumber(input) {
-    if (isNaN(input)) {
+    if (input.length < 1 || isNaN(input)) {
       throw new Error(ERROR_MESSAGE.NUMBER);
     }
   }
