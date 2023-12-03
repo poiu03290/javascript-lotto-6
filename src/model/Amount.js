@@ -14,21 +14,21 @@ class Amount {
     this.#count = this.#amount / 1000;
   }
 
-  static async isAllCheck(amount) {
-    let input = amount;
+  static async isAllCheck(input) {
+    let temp = input;
     while (true) {
       try {
-        Amount.isCheckNumber(input);
-        Amount.isCheckThousandUnit(input);
-        Amount.isCheckAtLeastValue(input);
+        Amount.isCheckNumber(temp);
+        Amount.isCheckThousandUnit(temp);
+        Amount.isCheckAtLeastValue(temp);
         break;
       } catch (error) {
         Console.print(error.message);
-        input = await InputView.amount(MESSAGE.AMOUNT);
+        temp = await InputView.amount(MESSAGE.AMOUNT);
       }
     }
 
-    return input;
+    return temp;
   }
 
   static isCheckNumber(input) {
@@ -45,7 +45,7 @@ class Amount {
 
   static isCheckAtLeastValue(input) {
     if (Number(input) < 1000) {
-      throw new Error(ERROR_MESSAGE.VALUE);
+      throw new Error(ERROR_MESSAGE.AMOUNT_VALUE);
     }
   }
 
