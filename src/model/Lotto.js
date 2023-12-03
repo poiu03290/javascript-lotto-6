@@ -9,7 +9,7 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  static async isAllCehckNum(input) {
+  static async isAllCheck(input) {
     let temp = input;
     while (true) {
       try {

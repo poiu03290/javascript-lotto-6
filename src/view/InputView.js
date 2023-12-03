@@ -15,7 +15,7 @@ const InputView = {
 
   async lotto() {
     const input = await Console.readLineAsync(MESSAGE.LOTTO);
-    const result = Lotto.isAllCehckNum(input);
+    const result = Lotto.isAllCheck(input);
 
     return result;
   },
