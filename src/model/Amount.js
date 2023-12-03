@@ -54,8 +54,8 @@ class Amount {
     let index = 0;
 
     while (index < this.#count) {
-      const test = this.#getUniqueNumbers();
-      publishedNumber.push(test);
+      const numbers = this.#getUniqueNumbers();
+      publishedNumber.push(numbers);
 
       index += 1;
     }
