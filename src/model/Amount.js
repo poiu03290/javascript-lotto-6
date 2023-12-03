@@ -1,16 +1,20 @@
 import { Console } from "@woowacourse/mission-utils";
+import { Random } from "@woowacourse/mission-utils";
+
+import InputView from "../view/InputView.js";
 
 import { MESSAGE, ERROR_MESSAGE } from "../data/constant.js";
 
 class Amount {
   #amount;
+  #count;
 
   constructor(amount) {
-    this.#isAllCheck(amount);
     this.#amount = amount;
+    this.#count = this.#amount / 1000;
   }
 
-  async #isAllCheck(amount) {
+  static async isAllCheck(amount) {
     let input = amount;
     while (true) {
       try {
@@ -20,9 +24,11 @@ class Amount {
         break;
       } catch (error) {
         Console.print(error.message);
-        input = await Console.readLineAsync(MESSAGE.AMOUNT);
+        input = await InputView.amount(MESSAGE.AMOUNT);
       }
     }
+
+    return input;
   }
 
   static isCheckNumber(input) {
@@ -43,8 +49,24 @@ class Amount {
     }
   }
 
-  test() {
-    console.log("ss", this.#amount);
+  getPublishedNumbers() {
+    const publishedNumber = [];
+    let index = 0;
+
+    while (index < this.#count) {
+      const test = this.#getUniqueNumbers();
+      publishedNumber.push(test);
+
+      index += 1;
+    }
+
+    return publishedNumber;
+  }
+
+  #getUniqueNumbers() {
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+
+    return numbers.sort((a, b) => a - b);
   }
 }
 export default Amount;

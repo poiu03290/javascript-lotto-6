@@ -7,8 +7,9 @@ import { MESSAGE } from "../data/constant.js";
 const InputView = {
   async amount() {
     const input = await Console.readLineAsync(MESSAGE.AMOUNT);
+    const amount = Amount.isAllCheck(input);
 
-    return new Amount(input);
+    return amount;
   },
 };
 

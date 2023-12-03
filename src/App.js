@@ -1,8 +1,9 @@
-import InputView from "./view/InputView.js";
+import LottoController from "./controller/LottoController.js";
 
 class App {
   async play() {
-    const amount = await InputView.amount();
+    const controller = new LottoController();
+    controller.start();
   }
 }
 
