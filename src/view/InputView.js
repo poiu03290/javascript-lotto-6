@@ -1,10 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 
 import Amount from "../model/Amount.js";
-
-import { MESSAGE } from "../data/constant.js";
 import Lotto from "../model/Lotto.js";
 import Bonus from "../model/Bonus.js";
+
+import { MESSAGE } from "../data/constant.js";
 
 const InputView = {
   async amount() {
@@ -15,10 +15,16 @@ const InputView = {
   },
 
   async lotto() {
-    const input = await Console.readLineAsync(MESSAGE.LOTTO);
-    const result = Lotto.isAllCheck(input);
+    try {
+      const input = await Console.readLineAsync(MESSAGE.LOTTO);
+      const split = input.split(",").map((num) => Number(num));
+      Lotto.isAllCheck(split);
 
-    return result;
+      return split;
+    } catch (error) {
+      Console.print(error.message);
+      return InputView.lotto();
+    }
   },
 
   async bonus(lotto) {

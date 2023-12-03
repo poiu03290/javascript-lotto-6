@@ -1,34 +1,17 @@
-import { Console } from "@woowacourse/mission-utils";
-import { MESSAGE, ERROR_MESSAGE } from "../data/constant.js";
-import InputView from "../view/InputView.js";
+import { ERROR_MESSAGE } from "../data/constant.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
+    Lotto.isAllCheck(numbers);
     this.#numbers = numbers;
   }
 
-  static async isAllCheck(input) {
-    let temp = input;
-    while (true) {
-      try {
-        const lotto = temp.split(",");
-        Lotto.isTryValidate(lotto);
-        break;
-      } catch (error) {
-        Console.print(error.message);
-        temp = await InputView.lotto(MESSAGE.LOTTO);
-      }
-    }
-
-    return temp;
-  }
-
-  static isTryValidate(lotto) {
-    Lotto.isCheckProperLength(lotto);
-    Lotto.isCheckDuplicatedNumber(lotto);
-    lotto.forEach((number) => {
+  static isAllCheck(input) {
+    Lotto.isCheckProperLength(input);
+    Lotto.isCheckDuplicatedNumber(input);
+    input.forEach((number) => {
       Lotto.isCheckNumber(number);
       Lotto.isCheckProperValue(number);
     });
@@ -62,9 +45,9 @@ class Lotto {
     let matchCount = [];
 
     publishedLotto.forEach((lotto) => {
-      let count = this.getMatchCountByLotto(lotto);
+      let count = this.#getMatchCountByLotto(lotto);
       if (count < 3) return;
-      if (count === 5 && this.compareBonus(lotto, bonus)) {
+      if (count === 5 && this.#compareBonus(lotto, bonus)) {
         return matchCount.push("bonus");
       }
       matchCount.push(count);
@@ -73,13 +56,13 @@ class Lotto {
     return this.#modifyObj(matchCount);
   }
 
-  getMatchCountByLotto(lotto) {
+  #getMatchCountByLotto(lotto) {
     const count = lotto.filter((num) => this.#numbers.includes(num)).length;
 
     return count;
   }
 
-  compareBonus(lotto, bonus) {
+  #compareBonus(lotto, bonus) {
     if (lotto.includes(Number(bonus))) {
       return true;
     }

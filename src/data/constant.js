@@ -2,8 +2,8 @@ const MESSAGE = Object.freeze({
   AMOUNT: "구입금액을 입력해 주세요.",
   LOTTO: "당첨 번호를 입력해 주세요.",
   BONUS: "보너스 번호를 입력해 주세요.",
-  RATE: (rate) => `총 수익률은 ${rate}입니다.`,
-  PUBLISH: (count) => `${count}개 구매했습니다.`,
+  RATE: (rate) => `총 수익률은 ${rate}%입니다.`,
+  PUBLISH: (count) => `${count}개를 구매했습니다.`,
 });
 
 const ERROR_MESSAGE = Object.freeze({

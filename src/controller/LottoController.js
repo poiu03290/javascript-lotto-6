@@ -18,12 +18,12 @@ class LottoController {
     this.#publishedLotto = amount.getPublishedNumbers();
     OutPutView.printLotto(this.#publishedLotto);
 
-    this.requestLotto();
+    await this.requestLotto();
   }
 
   async requestLotto() {
     this.#lotto = await InputView.lotto();
-    this.requestBonus();
+    await this.requestBonus();
   }
 
   async requestBonus() {
