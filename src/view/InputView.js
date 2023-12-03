@@ -4,6 +4,7 @@ import Amount from "../model/Amount.js";
 
 import { MESSAGE } from "../data/constant.js";
 import Lotto from "../model/Lotto.js";
+import Bonus from "../model/Bonus.js";
 
 const InputView = {
   async amount() {
@@ -16,6 +17,13 @@ const InputView = {
   async lotto() {
     const input = await Console.readLineAsync(MESSAGE.LOTTO);
     const result = Lotto.isAllCheck(input);
+
+    return result;
+  },
+
+  async bonus(lotto) {
+    const input = await Console.readLineAsync(MESSAGE.BONUS);
+    const result = Bonus.isAllCheck(input, lotto);
 
     return result;
   },
